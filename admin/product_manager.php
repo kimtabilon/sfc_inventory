@@ -26,6 +26,7 @@
   	<table cellpadding="0" cellspacing="0" border="0" class="table" id="productTable">
 		<thead>		
 		        <tr>			        
+					<th>QR</th>
 					<th>SKU</th>
 					<th>Name</th>
 					<th>Description </th>
