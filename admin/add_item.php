@@ -44,7 +44,14 @@
 										<div class="control-group">
 											<label class="control-label" for="inputPassword">Inventory Code/Serial</label>
 											<div class="controls">
-											<input type="text" class="span8" name="item_serial" id="inputPassword" placeholder="Inventory Code or Serial" required>
+											<input type="number" class="span8" name="item_serial" id="inputPassword" placeholder="Inventory Code or Serial" required>
+											</div>
+										</div>
+
+										<div class="control-group">
+											<label class="control-label" for="inputPassword">Quantity</label>
+											<div class="controls">
+											<input type="text" class="span8" name="item_qty" id="" placeholder="Item Quantity" required>
 											</div>
 										</div>
 										
@@ -82,6 +89,7 @@
 if (isset($_POST['save'])){
 $item_id = $_POST['item_id'];
 $item_name = $_POST['item_name'];
+$item_qty = $_POST['item_qty'];
 $item_brand = $_POST['item_brand'];
 $item_serial = $_POST['item_serial'];
 $item_status = $_POST['item_status'];
@@ -98,7 +106,7 @@ window.location = "item.php";
 </script>
 <?php
 }else{
-mysqli_query($conn,"insert into item (item_id,item_name,item_brand,item_serial,item_status,item_description) values('$item_id','$item_name','$item_brand','$item_serial','$item_status','$item_description')")or die(mysqli_error());
+mysqli_query($conn,"insert into item (item_id,item_name,item_brand, item_qty,item_serial,item_status,item_description) values('$item_id','$item_name','$item_brand','$item_qty','$item_serial','$item_status','$item_description')")or die(mysqli_error());
 mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$admin_username','Add Item $item_name $item_brand')")or die(mysqli_error());											
 ?>
 <script>

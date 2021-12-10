@@ -57,6 +57,13 @@
 											<input type="text" class="span8" value="<?php echo $row['item_serial']; ?>" name="item_serial" id="inputPassword" placeholder="Inventory Code or Serial" required>
 											</div>
 										</div>
+
+										<div class="control-group">
+											<label class="control-label" for="inputPassword">Quantity</label>
+											<div class="controls">
+											<input type="text" class="span8" value="<?php echo $row['item_qty']; ?>" name="item_qty" id="" placeholder="Item Quantity" required>
+											</div>
+										</div>
 										
 										<div id="hide">
 										<div class="control-group">
@@ -96,6 +103,7 @@
 										if (isset($_POST['update'])){
                                         $item_name = $_POST['item_name'];
                                         $item_brand = $_POST['item_brand'];
+                                        $item_qty = $_POST['item_qty'];
                                         $item_serial = $_POST['item_serial'];
                                         $item_status = $_POST['item_status'];
                                         $item_description = $_POST['item_description'];
@@ -104,6 +112,7 @@
 									
 										mysqli_query($conn,"update item set    item_name = '$item_name',
 																		item_brand  = '$item_brand',
+																		item_qty  = '$item_qty',
 																		item_serial = '$item_serial',
 																		item_status = '$item_status',
 																		item_description = '$item_description'

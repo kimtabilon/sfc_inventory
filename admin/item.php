@@ -81,16 +81,19 @@
 <div class="block-content collapse in">
     <div class="span12">
 	<form action="" method="post">
-  	<table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
+  	<table cellpadding="0" cellspacing="0" border="0" class="table" id="itemTable">
 		<thead>		
 		        <tr>			        
 					<th class="empty"></th>
+					<th>QR</th>
 					<th>Item Name</th>
 					<th>Item Description </th>
+					<th>QTY</th>
 					<th>Inventory Code</th>
 			        <th>Item Brand  </th>					
 					<th>Item Status / Remarks </th>					
 					<th>Item Realease Status  </th>
+					<th>Added at</th>
                     <th class="empty"></th>					
 		    </tr>
 		</thead>
@@ -105,9 +108,9 @@
 										
 		<tr>
 		<td><?php
-			   $device_query2 = mysqli_query($conn,"select * from item 
+			   /*$device_query2 = mysqli_query($conn,"select * from item 
 		       ORDER BY item.item_id DESC ")or die(mysqli_error());
-		       $dev=mysqli_fetch_assoc($device_query2);
+		       $dev=mysqli_fetch_assoc($device_query2);*/
 		       if($row['item_status']=='New')
 		       {
 			   echo '<i class="icon-check"></i><div id="hide"><strong>'.$row['item_status'].'</strong></div>';
@@ -124,10 +127,14 @@
 			   {
 			   echo '<i class="icon-ok"></i><div id="hide"><strong>'.$row['item_status'].'</strong></div>';
 		       };
+
+		       $qrCht = urlencode($row['item_name'].' (serial:'.$row['item_serial'].') (brand:'.$row['item_brand'].')');
 			  ?>
 		</td>
+			<td><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?=$qrCht?>&choe=UTF-8" title="Scan Item Code" style="width: 100px; height: 100px; max-width: none;" /></td>
 			<td><?php echo $row['item_name']; ?></td>
 			<td><?php echo $row['item_description']; ?></td>
+			<td><?php echo $row['item_qty']; ?></td>
 			<td><?php echo $row['item_serial']; ?></td>
 			<td><?php echo $row['item_brand']; ?></td>					
 			<td><?php
@@ -153,6 +160,8 @@
 		       };
 			   
 			  ?></td>
+
+			  	
  <?php
 		$device_query12 = mysqli_query($conn,"select * from release_details
 		where item_id ='$id' and remarks =' / Brand new'
@@ -160,6 +169,8 @@
 		$dev2=mysqli_fetch_assoc($device_query12);		
 ?>
 			 <td><?php echo $dev2['release_status']; ?></td>
+			 <td><?php echo $row['created_at']; ?></td>
+			 
 			<?php include('toolttip_edit_delete.php'); ?>												
 			<td class="empty" width="80"><a rel="tooltip"  title="Edit item" id="i<?php echo $id; ?>" href="item_edit.php<?php echo '?id='.$id; ?>" class="btn btn-success"><i class="icon-pencil"> Edit</i></a></td>
 		</tr>

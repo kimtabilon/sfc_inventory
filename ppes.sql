@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2021 at 01:31 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Dec 10, 2021 at 01:44 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -108,7 +109,30 @@ INSERT INTO `activity_log` (`activity_log_id`, `username`, `date`, `action`) VAL
 (473, 'Jonard', '2021-11-01 13:57:41', 'Edit system User oting tianzon'),
 (474, 'Jonard', '2021-11-01 14:21:37', 'Add Guest User Linlyn Canape'),
 (475, 'Jonard', '2021-11-01 20:22:26', 'Edit Employee Jonremus,R.,Sevellejo'),
-(476, 'Jonard', '2021-11-01 20:27:51', 'Edit Employee Jonremus,R.,Sevellejo');
+(476, 'Jonard', '2021-11-01 20:27:51', 'Edit Employee Jonremus,R.,Sevellejo'),
+(477, 'chito', '2021-12-08 18:12:24', 'Add Item test tet'),
+(478, 'chito', '2021-12-08 18:12:46', 'Edit item info test 0'),
+(479, 'chito', '2021-12-08 18:14:35', 'Edit item info test 435546'),
+(480, 'chito', '2021-12-08 18:36:34', 'Add Item tsdf dfgsdfges'),
+(481, 'chito', '2021-12-08 18:39:30', 'Add Item asdfsdaf asdfasdf'),
+(482, 'chito', '2021-12-08 19:12:18', 'Add Department HSE'),
+(483, 'chito', '2021-12-09 19:54:34', 'Add Employee KIM,GOMEZ,TABILON'),
+(484, 'chito', '2021-12-09 20:31:29', 'Add Product   '),
+(485, 'chito', '2021-12-09 20:32:48', 'Add Product ACER-3567 Acer vPro i7 8gen Acer'),
+(486, 'chito', '2021-12-09 20:49:42', 'Edit item info ACER-3567x Acer vPro i7 8genx'),
+(487, 'chito', '2021-12-09 20:49:49', 'Edit item info ACER-3567 Acer vPro i7 8gen'),
+(488, 'chito', '2021-12-09 20:58:13', 'Add Product BND-LONG-REAM Bondpaper Long Ream Hard Copy'),
+(489, 'chito', '2021-12-09 21:17:42', 'Add Receiver product_id:<br />\r\n<b>Notice</b>:  Undefined index: id in <b>C:xampphtdocssfcinventoryadminproduct_receiver_add.php'),
+(490, 'chito', '2021-12-09 21:42:29', 'Edit Product BND-LONG-REAM Bondpaper Long Ream'),
+(491, 'chito', '2021-12-09 21:42:40', 'Edit Product BND-LONG-REAM Bondpaper Long Ream'),
+(492, 'chito', '2021-12-09 21:42:51', 'Edit Product BND-LONG-REAM Bondpaper Long Ream'),
+(493, 'chito', '2021-12-09 21:44:16', 'Add Receiver product_id:<br />\r\n<b>Notice</b>:  Undefined index: id in <b>C:xampphtdocssfcinventoryadminproduct_receiver_add.php'),
+(494, 'chito', '2021-12-09 21:45:15', 'Add Receiver product_id:3, qty:15, serial:'),
+(495, 'chito', '2021-12-09 21:45:31', 'Delete Receiver id:2'),
+(496, 'chito', '2021-12-09 22:37:03', 'Realeasing product_id:3, qty:12, serial:'),
+(497, 'chito', '2021-12-09 22:57:30', 'Change release status id:0, status:released'),
+(498, 'chito', '2021-12-09 22:59:49', 'Change release status id:0, status:ready'),
+(499, 'chito', '2021-12-09 23:00:08', 'Change release status id:0, status:released');
 
 -- --------------------------------------------------------
 
@@ -127,6 +151,13 @@ CREATE TABLE `client` (
   `position` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `client`
+--
+
+INSERT INTO `client` (`client_id`, `employee_id_no`, `firstname`, `middlename`, `lastname`, `type`, `contact_no`, `position`) VALUES
+(5, '123', 'KIM', 'GOMEZ', 'TABILON', 'Regular', '09675743804', 'T1');
+
 -- --------------------------------------------------------
 
 --
@@ -139,6 +170,13 @@ CREATE TABLE `department` (
   `thumbnails` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`dep_id`, `dep_name`, `thumbnails`) VALUES
+(22, 'HSE', 'uploads/super_admin.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -149,20 +187,103 @@ CREATE TABLE `item` (
   `item_id` int(11) NOT NULL,
   `item_serial` int(11) NOT NULL,
   `item_name` varchar(100) NOT NULL,
+  `item_qty` varchar(20) DEFAULT NULL,
   `item_brand` varchar(100) NOT NULL,
   `item_description` varchar(100) NOT NULL,
-  `item_status` varchar(100) NOT NULL
+  `item_status` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`item_id`, `item_serial`, `item_name`, `item_brand`, `item_description`, `item_status`) VALUES
-(26, 1234, 'acer', 'intel', '<p>black</p>\r\n', 'New'),
-(27, 2134, 'linovo1', 'i54', '<p>white</p>\r\n', 'In-Used'),
-(28, 4532, 'hp', 'hpe12', '<p>gold</p>\r\n', 'Good condition'),
-(29, 1209456, 'dell', 'dell21', '<p>blue</p>\r\n', 'Good condition');
+INSERT INTO `item` (`item_id`, `item_serial`, `item_name`, `item_qty`, `item_brand`, `item_description`, `item_status`, `created_at`) VALUES
+(26, 1234, 'acer', '1', 'intel', '<p>black</p>\r\n', 'New', '2021-12-08 00:00:00'),
+(27, 2134, 'linovo1', '1', 'i54', '<p>white</p>\r\n', 'In-Used', '2021-12-08 00:00:00'),
+(28, 4532, 'hp', '1', 'hpe12', '<p>gold</p>\r\n', 'Good condition', '2021-12-08 00:00:00'),
+(29, 1209456, 'dell', '1', 'dell21', '<p>blue</p>\r\n', 'Good condition', '2021-12-08 00:00:00'),
+(30, 435546, 'test', '2', 'tet', '<p>reresdf</p>\r\n', 'New', '2021-12-08 00:00:00'),
+(32, 123, 'asdfsdaf', '1', 'asdfasdf', '<p>asdasd</p>\r\n', 'New', '2021-12-08 18:39:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `sku` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `brand` varchar(255) NOT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_by` varchar(255) NOT NULL,
+  `updated_at` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `sku`, `name`, `description`, `brand`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(2, 'ACER-3567', 'Acer vPro i7 8gen', '<p>Acer vPro i7 8gen</p>\r\n', 'Acer', 'chito', '2021-12-09 20:32:48', 'chito', '2021-12-09 01:49:49'),
+(3, 'BND-LONG-REAM', 'Bondpaper Long Ream', '<p>Hard Copy Paper Short Long A4 Size Bond Paper Per Ream 500 Sheets</p>\r\n', 'Hard Copy', 'chito', '2021-12-09 20:58:13', 'chito', '2021-12-09 02:42:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_receiver`
+--
+
+CREATE TABLE `product_receiver` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` varchar(100) NOT NULL,
+  `serial` varchar(255) DEFAULT NULL,
+  `status` varchar(150) NOT NULL DEFAULT 'new',
+  `created_by` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_by` varchar(255) NOT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_receiver`
+--
+
+INSERT INTO `product_receiver` (`id`, `product_id`, `qty`, `serial`, `status`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, 2, '1', 'C1DFTFGH', 'new', 'chito', '2021-12-09 21:17:42', '', NULL),
+(3, 3, '15', '', 'new', 'chito', '2021-12-09 21:45:15', '', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_release`
+--
+
+CREATE TABLE `product_release` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 1,
+  `serial` varchar(255) DEFAULT NULL,
+  `employee_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'ready',
+  `created_by` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_by` varchar(255) DEFAULT NULL,
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_release`
+--
+
+INSERT INTO `product_release` (`id`, `product_id`, `qty`, `serial`, `employee_id`, `department_id`, `status`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, 3, 12, '', 5, 22, 'released', 'chito', '2021-12-09 22:37:03', 'chito', '2021-12-09 04:00:08');
 
 -- --------------------------------------------------------
 
@@ -410,7 +531,10 @@ INSERT INTO `user_log` (`user_log_id`, `username`, `login_date`, `logout_date`, 
 (245, 'Jonard', '2021-11-01 13:58:12', '2021-11-01', 1, 0),
 (246, 'linlyn', '2021-11-01 14:21:58', '', 0, 3),
 (247, 'Jonard', '2021-11-01 20:16:17', '2021-11-01', 1, 0),
-(248, 'Jonard', '2021-11-01 20:31:26', '', 1, 0);
+(248, 'Jonard', '2021-11-01 20:31:26', '', 1, 0),
+(249, 'chito', '2021-12-07 13:10:36', '', 3, 0),
+(250, 'chito', '2021-12-08 18:00:26', '', 3, 0),
+(251, 'chito', '2021-12-09 19:43:17', '', 3, 0);
 
 --
 -- Indexes for dumped tables
@@ -439,6 +563,24 @@ ALTER TABLE `department`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`item_id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_receiver`
+--
+ALTER TABLE `product_receiver`
+  ADD PRIMARY KEY (`id`,`updated_by`);
+
+--
+-- Indexes for table `product_release`
+--
+ALTER TABLE `product_release`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `release_details`
@@ -484,25 +626,37 @@ ALTER TABLE `user_log`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=477;
+  MODIFY `activity_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=500;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dep_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `dep_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_receiver`
+--
+ALTER TABLE `product_receiver`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `release_details`
@@ -538,7 +692,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_log`
 --
 ALTER TABLE `user_log`
-  MODIFY `user_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
+  MODIFY `user_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

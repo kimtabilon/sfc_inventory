@@ -12,12 +12,12 @@
 						<h2 id="sc" align="center"><image src="images/sclogo.png" width="45%" height="45%"/></h2>
 		
 				<?php	
-	             $count_item=mysqli_query($conn,"select * from release_details 
+	             /*$count_item=mysqli_query($conn,"select * from release_details 
 				                 LEFT JOIN item ON release_details.item_id = item.item_id
 	                             LEFT JOIN tbl_release ON release_details.release_id=tbl_release.release_id
 								 LEFT JOIN client ON tbl_release.client_id=client.client_id
 		                        where release_status='Returned' and  remarks=' / Brand new' ORDER BY release_details.release_details_id DESC");
-	             $count = mysqli_num_rows($count_item);
+	             $count = mysqli_num_rows($count_item);*/
                  ?>	
 						
             <!-------------------------------block ------------------------------>

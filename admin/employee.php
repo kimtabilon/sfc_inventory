@@ -6,7 +6,7 @@
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
             <div class="row-fluid">
-				<?php include('employee_sidebar.php'); ?>
+				<?php include('manage_user_sidebar.php'); ?>
 				<div class="span3" id="adduser">
 				<?php include('add_employee.php'); ?>	
 

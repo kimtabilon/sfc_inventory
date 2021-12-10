@@ -33,7 +33,7 @@
 										?>
 										
 										<li id="del<?php echo $id; ?>">
-												<a href="myitem.php<?php echo '?dep_id='.$dep_id; ?>">
+												<a href="product_release_per_department.php<?php echo '?id='.$dep_id; ?>">
 													<img src ="<?php echo $row['thumbnails'] ?>" width="130" height="148" class="img-polaroid" alt="">
 													<div>
 													<span><p><?php echo $row['dep_name']; ?></p></span>

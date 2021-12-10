@@ -7,15 +7,35 @@
 						 
 						 <!------/.* manage device sidebar*------->						
 						 <li class="active">						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs"><i class="icon-chevron-right"></i><i class="icon-folder-open-alt icon-large"></i>&nbsp;Master File
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs"><i class="icon-chevron-right"></i><i class="icon-folder-open-alt icon-large"></i>&nbsp;Catalog
 						    <div class="muted pull-right"><i class="caret"></i></div></a>					
 						    <ul id="bs" class="collapse">						
                             <li class="">
-                            <a href="item.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Item </a>
+                            	<a href="product_inventory.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Inventory </a>
                             </li>
                             <li class="">
-                            <a href="employee.php"><i class="icon-chevron-right"></i><i class="icon-group"></i> Register Employee</a>
+                            	<a href="product_receiver.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Receiver </a>
+                            </li>
+                            <li class="">
+                            	<a href="product_manager.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Product Manager </a>
                             </li> 					   							
+						    </ul>
+						</li>
+
+						<!------/.* tracsaction sidebar*------->	
+					    <li class="">						
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs2"><i class="icon-chevron-right"></i><i class="icon-retweet icon-large"></i>&nbsp;Transaction
+							<div class="muted pull-right"><i class="caret"></i></div></a>						
+						    <ul id="bs2" class="collapse">						
+                            <li class="">
+                            <a href="product_release.php"><i class="icon-chevron-right"></i><i class="icon-share"></i> Releasing</a>
+                            </li>
+						    <!-- <li class="">
+                            <a href="view_return.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Return Item</a>
+                            </li>
+							<li class="">
+                            <a href="View_release_item.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Release Item</a>
+                            </li> -->
 						    </ul>
 						</li>
 						
@@ -34,33 +54,19 @@
 						    </ul>
 						</li>
 						
-                         <!------/.* tracsaction sidebar*------->	
-					    <li class="">						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs2"><i class="icon-chevron-right"></i><i class="icon-retweet icon-large"></i>&nbsp;Transaction
-							<div class="muted pull-right"><i class="caret"></i></div></a>						
-						    <ul id="bs2" class="collapse">						
-                            <li class="">
-                            <a href="realease.php"><i class="icon-chevron-right"></i><i class="icon-share"></i> Realeasing</a>
-                            </li>
-						    <li class="">
-                            <a href="view_return.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Return Item</a>
-                            </li>
-							<li class="">
-                            <a href="View_release_item.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Release Item</a>
-                            </li>
-						    </ul>
-						</li>
-						
 					  <!------/.* manage PPES user sidebar*------->	
 						<li>						
 						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs3"><i class="icon-chevron-right"></i><i class="icon-group"></i>&nbsp;Manage PPES User
 							<div class="muted pull-right"><i class="caret"></i></div></a>						
-						    <ul id="bs3" class="collapse">						
+						    <ul id="bs3" class="collapse">		
+						    <li class="">
+                            <a href="employee.php"><i class="icon-chevron-right"></i><i class="icon-group"></i> Employee</a>
+                            </li>				
                             <!-- 
 <li class="">
                             <a href="technical_user.php"><i class="icon-chevron-right"></i><i class="icon-user"></i>&nbsp;Technical Staff</a>
                             </li>
--->
+--> 
 						    <li class="">
                             <a href="admin_user.php"><i class="icon-chevron-right"></i><i class="icon-user"></i>&nbsp;System User</a>
                             </li>
