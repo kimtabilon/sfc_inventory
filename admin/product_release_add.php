@@ -29,7 +29,8 @@
 								<div class="control-group">
 									 <label class="control-label" for="inputEmail" >Select Product</label>
 										 <div class="controls">
-											  <select name="product_id" class="chzn-select" required/>
+											  <select name="product_id" class="chzn-select product-select" required/>
+											  	<option value="">-- Product List --</option>
 										          <?php $result =  mysqli_query($conn,"select id, sku, name from product")or die(mysqli_error()); 
 										          while ($row=mysqli_fetch_array($result)){ ?>
 											   <option value="<?php echo $row['id']; ?>"><?php echo $row['sku'].' '.$row['name']; ?></option>
@@ -41,7 +42,7 @@
 								<div class="control-group">
 									<label class="control-label" for="inputPassword">Quantity</label>
 									<div class="controls">
-										<input type="number" class="span8" name="qty" id="inputPassword" placeholder="Quantity" required>
+										<input type="number" class="span8 input-qty" name="qty" id="inputPassword" min="1" placeholder="Quantity" required>
 									</div>
 								</div>
 									
@@ -119,13 +120,29 @@ $.jGrowl("Product Successfully release", { header: 'Product release' });
 
 ?>
 																										
-		                            </div>
-		                        </div>
-		                        <!-- /block -->
-		                    </div>
-		                </div>
-            </div>
-		<?php include('footer.php'); ?>
+	                            </div>
+	                        </div>
+	                        <!-- /block -->
+	                    </div>
+	                </div>
         </div>
-		<?php include('script.php'); ?>
-    </body>
+	<?php include('footer.php'); ?>
+    </div>
+	<?php include('script.php'); ?>
+
+	<script type="text/javascript">
+		<?php 
+			 $base_url="http://".$_SERVER['SERVER_NAME'].dirname($_SERVER["REQUEST_URI"].'?');
+		?>
+		$('.product-select').on('change', function() {
+			var id=$(this).val();
+			console.log(id);
+			$.get("<?=$base_url?>/product_inventory_ajax.php?id="+id, function(res, status){
+				var res = JSON.parse(res);
+
+				$('.input-qty').attr('max',res.total).attr('placeholder', 'Remaining Qty is '+res.total);
+				console.log(res);
+			});
+		});
+	</script>
+</body>
