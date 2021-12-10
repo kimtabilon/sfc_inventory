@@ -130,7 +130,12 @@ $(document).ready(function() {
 		},
 		aaSorting: [
             [6, "desc"]
-        ]
+        ],
+        aoColumnDefs: [{
+        	'bSearchable' : false, 
+	        'bSortable': false,
+	        'aTargets': [-1, -2] /* 1st one, start by the right */
+	    }]
 	});
 
 	<?php if (isset($_GET['view'])){ ?>
