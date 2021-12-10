@@ -23,7 +23,7 @@
 <div class="block-content collapse in">
     <div class="span12">
 	<form action="" method="post">
-  	<table cellpadding="0" cellspacing="0" border="0" class="table" id="itemTable">
+  	<table cellpadding="0" cellspacing="0" border="0" class="table" id="releasedTable">
 		<thead>		
 		        <tr>			        
 					<th>Employee</th>
@@ -105,6 +105,7 @@ $.jGrowl("Item deleted", { header: 'Item deleted' });
 <?php
 }
 ?>	
+	
 		
 			  		
 </div>
@@ -118,7 +119,24 @@ $.jGrowl("Item deleted", { header: 'Item deleted' });
 </div>
 <?php include('script.php'); ?>
 
+
 <script type="text/javascript">
+$(document).ready(function() {
+	$('#releasedTable').dataTable( {
+		sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+		sPaginationType: "bootstrap",
+		oLanguage: {
+			"sLengthMenu": "_MENU_ records per page"
+		},
+		aaSorting: [
+            [6, "desc"]
+        ]
+	});
+
+	<?php if (isset($_GET['view'])){ ?>
+		$('#releasedTable').dataTable().fnFilter('<?=$_GET['view']?>');
+	<?php } ?>	
+
 	$('.change_status').on('change', function() {
 		if($(this).val()!='') {
 			if(confirm('Continue change status to '+$(this).val())) {
@@ -128,7 +146,9 @@ $.jGrowl("Item deleted", { header: 'Item deleted' });
 				$(this).val('');
 			}
 		}
-	}) 
+	}); 
+} );
 </script>
+
  </body>
 </html>

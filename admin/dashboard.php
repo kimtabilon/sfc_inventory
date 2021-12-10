@@ -29,7 +29,7 @@
 <div class="block-content collapse in">
 <div id="page-wrapper">
         <?php 
-	     $stocks = mysqli_query($conn,"select * from item")or die(mysqli_error());
+	     $stocks = mysqli_query($conn,"select * from product")or die(mysqli_error());
 		 $stocks = mysqli_num_rows($stocks);
 		 ?>
                 <div class="row-fluid">				
@@ -48,7 +48,7 @@
                                 </div>
 							 </div>	
                             </div>
-                            <a href="item.php">							  
+                            <a href="product_inventory.php">							  
                                 <div class="modal-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="icon-chevron-right"></i></span>
@@ -58,11 +58,9 @@
                         </div>
                     </div>
 				<?php 
-	             $result= mysqli_query($conn,"select * from item 
-							 where NOT EXISTS
-							(select * from release_details where item.item_id = release_details.item_id)
-		                     and item_status='new' 							
-							 ORDER BY item.item_id DESC")
+                 $_date = date('Y-m-d h:i:s', strtotime(date('Y-m-d h:i:s').' -5 days'));
+	             $result= mysqli_query($conn,"SELECT * FROM product 
+							 WHERE created_at > '$_date'")
 						     or die (mysqli_error());
 		         $result = mysqli_num_rows($result);
 		         ?>	
@@ -81,7 +79,7 @@
                                 </div>
 							 </div>	
                             </div>
-                            <a href="item.php">							  
+                            <a href="product_receiver.php">							  
                                 <div class="modal-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="icon-chevron-right"></i></span>
@@ -95,12 +93,32 @@
 <div id="page-wrapper">
            <div class="row-fluid">
 		    <?php 
-	        $reuse = mysqli_query($conn,"select * from item		                   
-							 where NOT EXISTS
-							(select * from release_details where release_status = 'pending' and item.item_id = release_details.item_id)
-		                     and item_status='Good condition'	
-							 ORDER BY item.item_id DESC")or die(mysqli_error());
-		    $reuse = mysqli_num_rows($reuse);
+            $reused=0;
+            $released=0;
+            $returned=0;
+	        $released_query = mysqli_query($conn,"select * from product_release")or die(mysqli_error());
+		    while($row = mysqli_fetch_array($released_query)){
+                switch ($row['status']) {
+                    case 'ready':
+                        break;
+
+                    case 'released':
+                        $released+=$row['qty'];
+                        break;
+
+                    case 'returned_good':
+                        $reused+=$row['qty'];
+                        $returned+=$row['qty'];
+                        break;
+
+                    case 'returned_damaged':
+                        $returned+=$row['qty'];
+                        break;
+
+                    default:
+                        break;
+                }
+            }
 		     ?>	
 			 <div class="span6">
                        <div class="panel panel-green">
@@ -111,13 +129,13 @@
                                       <i class="fa fa-share-square fa-5x"></i><br/>
                                     </div>
                                     <div class="span8 text-right"><br/>
-                                        <div class="huge"><?php echo $reuse;?></div>
+                                        <div class="huge"><?php echo $reused;?></div>
                                         <div>Availabe Re-Used Item</div><br/>
                                     </div>
                                 </div>
 							 </div>	
                             </div>
-                            <a href="reuse_item.php">							  
+                            <a href="product_release.php?view=returned_good">							  
                                 <div class="modal-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="icon-chevron-right"></i></span>
@@ -156,12 +174,8 @@
                     </div>   				
               </div>	       
         </div>  	
-<div id="page-wrapper">
-           <div class="row-fluid">
-		 <?php 
-	     $Realease = mysqli_query($conn,"select * from tbl_release")or die(mysqli_error());
-		 $Realease = mysqli_num_rows($Realease);
-		 ?>		   
+        <div id="page-wrapper">
+           <div class="row-fluid">	   
 			<div class="span6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -171,13 +185,13 @@
                                        <i class="fa icon-ok  fa-5x"></i><br/>
                                     </div>
                                     <div class="span8 text-right"><br/>
-                                        <div class="huge"><?php echo $Realease;?></div>
-                                        <div>Realease item</div><br/>
+                                        <div class="huge"><?php echo $released;?></div>
+                                        <div>Release item</div><br/>
                                     </div>
                                 </div>
 							 </div>	
                             </div>
-                            <a href="View_release_item.php">							  
+                            <a href="product_release.php?view=released">							  
                                 <div class="modal-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="icon-chevron-right"></i></span>
@@ -185,12 +199,7 @@
                                 </div>							  
                             </a>
                         </div>
-                    </div>
-			<?php 
-	      $return = mysqli_query($conn,"select * from release_details where 
-		                      release_status = 'returned' ORDER BY release_details.release_details_id DESC")or die(mysqli_error());
-		  $return = mysqli_num_rows($return);
-		  ?>							
+                    </div>					
 					<div class="span6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -200,13 +209,13 @@
                                          <i class="fa fa-desktop fa-5x"></i><br/>
                                     </div>
                                     <div class="span8 text-right"><br/>
-                                        <div class="huge"><?php echo $return;?></div>
+                                        <div class="huge"><?php echo $returned;?></div>
                                         <div>Return Item</div><br/>
                                     </div>
                                 </div>
 							 </div>	
                             </div>
-                            <a href="view_return.php">							  
+                            <a href="product_release.php?view=returned">							  
                                 <div class="modal-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="icon-chevron-right"></i></span>
