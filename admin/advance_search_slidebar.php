@@ -2,52 +2,55 @@
 	              <img id="admin_avatar" class="img-polaroid" src="<?php echo $row['adminthumbnails']; ?>"> 
                   <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                            <li class=""> 
-						   <a href="dashboard.php"><i class="icon-chevron-right"></i><i class="icon-home"></i>&nbsp;Dashboard</a> 
+						   <a href="dashboard.php"><i class="icon-chevron-right"></i><i class="icon-home icon-large"></i>&nbsp;Dashboard</a> 
 						   </li>
 						 
 						 <!------/.* manage device sidebar*------->						
-						 <li>						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs"><i class="icon-chevron-right"></i><i class="icon-folder-open-alt"></i>&nbsp;Master File
+						 <li class="">						
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs"><i class="icon-chevron-right"></i><i class="icon-folder-open-alt icon-large"></i>&nbsp;Catalog
 						    <div class="muted pull-right"><i class="caret"></i></div></a>					
 						    <ul id="bs" class="collapse">						
                             <li class="">
-                            <a href="item.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Item </a>
+                            	<a href="product_inventory.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Inventory </a>
                             </li>
                             <li class="">
-                            <a href="employee.php"><i class="icon-chevron-right"></i><i class="icon-group"></i> Register Employee</a>
+                            	<a href="product_receiver.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Receiver </a>
+                            </li>
+                            <li class="">
+                            	<a href="product_manager.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Product Manager </a>
                             </li> 					   							
+						    </ul>
+						</li>
+
+						<!------/.* tracsaction sidebar*------->	
+					    <li class="">						
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs2"><i class="icon-chevron-right"></i><i class="icon-retweet icon-large"></i>&nbsp;Transaction
+							<div class="muted pull-right"><i class="caret"></i></div></a>						
+						    <ul id="bs2" class="collapse">						
+                            <li class="">
+                            <a href="product_release.php"><i class="icon-chevron-right"></i><i class="icon-share"></i> Releasing</a>
+                            </li>
+						    <!-- <li class="">
+                            <a href="view_return.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Return Item</a>
+                            </li>
+							<li class="">
+                            <a href="View_release_item.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Release Item</a>
+                            </li> -->
 						    </ul>
 						</li>
 						
 						
 						 <!------/.* manage department sidebar*------->	
 						  <li class="">						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs1"><i class="icon-chevron-right"></i><i class="icon-sitemap"></i>&nbsp;Manage Department
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs1"><i class="icon-chevron-right"></i><i class="icon-sitemap icon-large"></i>&nbsp;Manage Department
 						    <div class="muted pull-right"><i class="caret"></i></div></a>					
 						    <ul id="bs1" class="collapse">						
                             <li class="">
-                             <a href="item_department.php"><i class="icon-chevron-right"></i><i class="icon-desktop"></i> Department </a>
+                             <a href="item_department.php"><i class="icon-chevron-right"></i><i class="icon-reorder icon-building"></i> Department </a>
                             </li>
                             <li class="">
-                            <a href="department.php"><i class="icon-chevron-right"></i><i class="icon-folder-open-alt"></i> Add Department</a>
+                            <a href="department.php"><i class="icon-chevron-right"></i><i class="icon-reorder icon-building"></i> Add Department</a>
                             </li> 					   							
-						    </ul>
-						</li>
-						
-                         <!------/.* tracsaction sidebar*------->	
-					    <li>						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs2"><i class="icon-chevron-right"></i><i class="icon-sitemap"></i>&nbsp;Transaction
-							<div class="muted pull-right"><i class="caret"></i></div></a>						
-						    <ul id="bs2" class="collapse">						
-                            <li class="">
-                            <a href="realease.php"><i class="icon-chevron-right"></i><i class="icon-map-marker"></i> Realeasing</a>
-                            </li>
-						    <li class="">
-                            <a href="view_return.php"><i class="icon-chevron-right"></i><i class="icon-sitemap"></i> View Return Item</a>
-                            </li>
-							<li class="">
-                            <a href="View_release_item.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Release Item</a>
-                            </li>
 						    </ul>
 						</li>
 						
@@ -55,12 +58,15 @@
 						<li>						
 						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs3"><i class="icon-chevron-right"></i><i class="icon-group"></i>&nbsp;Manage PPES User
 							<div class="muted pull-right"><i class="caret"></i></div></a>						
-						    <ul id="bs3" class="collapse">						
+						    <ul id="bs3" class="collapse">		
+						    <li class="">
+                            <a href="employee.php"><i class="icon-chevron-right"></i><i class="icon-group"></i> Employee</a>
+                            </li>				
                             <!-- 
 <li class="">
                             <a href="technical_user.php"><i class="icon-chevron-right"></i><i class="icon-user"></i>&nbsp;Technical Staff</a>
                             </li>
--->
+--> 
 						    <li class="">
                             <a href="admin_user.php"><i class="icon-chevron-right"></i><i class="icon-user"></i>&nbsp;System User</a>
                             </li>
@@ -92,6 +98,7 @@
                            </li>
                            </ul>
                         </li>
-                  </ul>									
+                  </ul>					
+				
 				<?php include('search_form.php'); ?>																		
 </div>

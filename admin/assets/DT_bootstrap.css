@@ -16,10 +16,10 @@ div.dataTables_info {
 	padding-top: 8px;
 }
 
-div.dataTables_paginate {
+/*div.dataTables_paginate {
 	float: right;
 	margin: 0;
-}
+}*/
 
 table.table {
 	clear: both;

@@ -1,5 +1,7 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
+<link rel="stylesheet" type="text/css" href="assets/datatable/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="assets/datatable/buttons.dataTables.min.css">
     <body>
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
@@ -25,8 +27,7 @@
 	<form action="" method="post">
   	<table cellpadding="0" cellspacing="0" border="0" class="table" id="productTable">
 		<thead>		
-		        <tr>			        
-					<th>QR</th>
+		        <tr>			 
 					<th>SKU</th>
 					<th>Name</th>
 					<th>Description </th>
@@ -46,7 +47,6 @@ while($row = mysqli_fetch_array($device_query)){
 	$id = $row['id'];
 ?>
 		<tr>
-			<td><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?=$row['sku']?>&choe=UTF-8" title="Scan Item Code" style="width: 100px; height: 100px; max-width: none;" /></td>
 			<td><?php echo $row['sku']; ?></td>
 			<td><?php echo $row['name']; ?></td>
 			<td><?php echo $row['description']; ?></td>
@@ -89,20 +89,25 @@ $.jGrowl("Product deleted", { header: 'Product deleted' });
 <?php include('footer.php'); ?>
 </div>
 <?php include('script.php'); ?>
+<script type="text/javascript" charset="utf8" src="assets/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.print.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#productTable').dataTable( {
-			sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-			sPaginationType: "bootstrap",
-			oLanguage: {
-				"sLengthMenu": "_MENU_ records per page"
-			},
+	        sDom: 'T<"clear">lfrtipB',
 			aaSorting: [
 	            [6, "desc"]
 	        ]
-		} );
+	    } );
 	} );
 </script>
+
  </body>
 </html>

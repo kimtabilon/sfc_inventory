@@ -1,9 +1,5 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
-<?php
-$item_name = $_POST['item_name'];
-$item_serial = $_POST['item_serial'];
-?>
     <body>
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
@@ -18,22 +14,12 @@ $item_serial = $_POST['item_serial'];
                        </div>
 			        </div>
 				
-					 <h2 id="sc" align="center"><image src="images/sclogo.png" width="45%" height="45%"/></h2>
-					 <?php	
-	             $count_item=mysqli_query($conn,"select * from release_details    
-	                             LEFT JOIN item ON release_details.item_id = item.item_id
-	                             LEFT JOIN tbl_release ON release_details.release_id=tbl_release.release_id
-								 LEFT JOIN client ON tbl_release.client_id=client.client_id
-		                         where item_name LIKE '%$item_name%' 							
-							     and item_serial LIKE '%$item_serial%'");
-	             $count = mysqli_num_rows($count_item);
-                 ?>	 
+					<h2 id="sc" align="center"><image src="images/sclogo.png" width="45%" height="45%"/></h2>
+
+
 				   <div id="block_bg" class="block">
                         <div class="navbar navbar-inner block-header">
-                             <div class="muted pull-left"><i class="icon-reorder icon-large"></i> Item Search Result List</div>
-                          <div class="muted pull-right">
-								Number of Search Item : <span class="badge badge-info"><?php  echo $count; ?></span>
-							 </div>
+                             <div class="muted pull-left"><i class="icon-reorder icon-large"></i> Transactions</div>
 						  </div>
 						  
   <h4 id="sc">Device List 
@@ -52,75 +38,61 @@ $item_serial = $_POST['item_serial'];
   	<table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
 		<thead>		
 		        <tr>			        
-					<th>Employee Full Name</th>
-					<th>Item Borrow </th>
-					<th>Item Code</th>
-			        <th>Realease status  </th>
-					<th>Item Status / Remarks</th>
-					<th>Date Borrow  </th>
-					<th>Date Returned   </th>				
-                    <th>Department Name </th>
+					<th>Employee</th>
+					<th>Item</th>
+					<th>Quantity </th>
+					<th>Serial </th>
+			        <th>Release Status  </th>	
+			        <th>Added by</th>				
+					<th>Date</th>						
+                    <th class="empty"></th>					
+                    <th class="empty"></th>
                     					
 		    </tr>
 		</thead>
 <tbody>
 <?php
-		$search_query = mysqli_query($conn,"select * from release_details    
-	                             LEFT JOIN item ON release_details.item_id = item.item_id
-	                             LEFT JOIN tbl_release ON release_details.release_id=tbl_release.release_id
-								 LEFT JOIN client ON tbl_release.client_id=client.client_id
-								 LEFT JOIN department ON release_details.dep_id = department.dep_id
-		                         where item_name LIKE '%$item_name%' 							
-							     and item_serial LIKE '%$item_serial%'")or die(mysqli_error());
+		$id = 0;
+		$field = 'id';
+
+		if(isset($_GET['product_id'])) {
+			$id = $_GET['product_id'];
+			$field = 'product_id';
+		} 
+
+		if(isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$field = 'id';
+		} 
+		
+		$search_query = mysqli_query($conn,"
+			SELECT product_release.*, product.sku, product.name, client.* from product_release
+			LEFT JOIN product ON product_release.product_id = product.id			    
+			LEFT JOIN client ON product_release.employee_id = client.client_id			    
+			WHERE product_release.$field = $id")or die(mysqli_error());
+		
 		while($row = mysqli_fetch_array($search_query)){
-		$release_details_id=$row['release_details_id'];
-		 $id=$row['release_id'];
-		 $client_id = $row['client_id'];
-		 $item_id = $row['item_id'];
-		 $dep_id = $row['dep_id'];
 		?>
 		<tr>
-            <td><?php echo $row['firstname']; ?>
-		    <?php echo $row['middlename']; ?>
-		    <?php echo $row['lastname']; ?></td>
-		    <td> <?php echo $row['item_name']; ?></td>	
-			<td><?php echo $row['item_serial']; ?></td>
-			<td><?php
-			   $release_status_query = mysqli_query($conn,"select * from release_details ")or die(mysqli_error());
-		       $dev=mysqli_fetch_assoc($release_status_query);
-		       if($row['release_status']=='pending')
-		       {
-			   echo '<div class="alert alert-danger"><i class="icon-ok"> </i><strong>'.$row['release_status'].'</strong></div>'; 
-               }
-		       else 
-			   {
-			  echo '<div class="alert alert-success"><i class="icon-ok"></i><strong>'.$row['release_status'].'</strong></div>';
-		       };
-			  ?>
-			</td>
-	
-		<td><?php
-			   $item_status_query = mysqli_query($conn,"select * from item 
-			   LEFT JOIN release_details ON item.item_id = release_details.item_id")or die(mysqli_error());
-		       $dev=mysqli_fetch_assoc($item_status_query);
-		       if($row['item_status']=='In-Used')
-		       {
-			   echo '<div class="alert alert-warning"><i class="icon-ok"> </i><strong>'.$row['item_status'].''.$row['remarks'].'</strong></div>';
-		       }
-		       else if($row['item_status']=='Good condition')
-			   {
-			   echo '<div class="alert alert-warning"><i class="icon-ok"></i><strong>'.$row['item_status'].''.$row['remarks'].'</strong></div>';
-               }
-		       else 
-			   {
-			  echo '<div class="alert alert-warning"><i class="icon-ok"></i><strong>'.$row['item_status'].'</strong></div>';
-		       };
-			  ?>
-		</td>
-            <td><?php echo date("M d, Y H:i:s",strtotime($row['date_borrow'])); ?></td>
-			<td><?php echo ($row['date_return'] == "0000-00-00 00:00:00") ? "" : date("M d, Y H:i:s",strtotime($row['date_return'])); ?></td>
-			<td><div class="alert alert-success"><?php echo $row['dep_name']; ?></td>
-						
+            <td><?php echo $row['firstname'].($row['middlename']!='' ? $row['middlename'].' ' : ' ').$row['lastname'].' ( '.$row['type'].' : '.$row['position'].' ) #'.$row['contact_no']; ?></td>
+			<td><?php echo $row['sku'].' '.$row['name']; ?></td>
+			<td><?php echo $row['qty']; ?></td>
+			<td><?php echo $row['serial']; ?></td>												
+			<td><?php echo $row['status']; ?></td>												
+			<td><?php echo $row['created_by']; ?></td>												
+			<td><?php echo $row['created_at']; ?></td>							
+			<td>
+				<input type="hidden" class="release-id" value="<?=$id?>">
+				<input type="hidden" class="release-qty" value="<?=$row['qty']?>">
+				<select class="change_status">
+					<option value="">-- Change Status --</option>
+					<option value="ready">Ready</option>
+					<option value="released">Released</option>
+					<option value="returned_good">Return/Good</option>
+					<option value="returned_damaged">Return/Damage</option>
+				</select>
+			</td>							
+			<td class="empty" width="80"><a onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" rel="tooltip"  title="Delete Item" id="i<?php echo $id; ?>" href="product_release.php<?php echo '?delete='.$id; ?>" class="btn btn-danger"><i class="icon-trash"> Delete</i></a></td>		
 		</tr>
 											
 	<?php } ?>   
@@ -128,7 +100,46 @@ $item_serial = $_POST['item_serial'];
 </tbody>
 </table>
 </form>		
+	
+<?php
+if (isset($_GET['delete'])){
+$id = $_GET['delete'];
+										
+mysqli_query($conn,"delete from product_release where id='$id'")or die(mysqli_error());
+mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$admin_username','Delete Receiver id:$id')")or die(mysqli_error());											
+?>
+<script>
+window.location = "product_release.php";
+$.jGrowl("Item deleted", { header: 'Item deleted' });
+</script>
+<?php
+}
+?>	
+
+<?php
+if (isset($_GET['status'])){
+$status = $_GET['status'];
+$id = $_GET['id'];
+$qty = $_GET['qty'];
+$input_qty = $_GET['input_qty'];
+$date = date('Y-m-d h:i:s');
+
+if($input_qty==$qty) {
+	mysqli_query($conn,"UPDATE product_release SET status='$status', updated_by='$admin_username', updated_at='$date' WHERE id='$id'")or die(mysqli_error());
 		
+} else {
+	$left_qty = $qty - $input_qty;
+	mysqli_query($conn,"UPDATE product_release SET qty='$left_qty', updated_by='$admin_username', updated_at='$date' WHERE id='$id'")or die(mysqli_error());
+	
+	
+	mysqli_query($conn,"INSERT INTO product_release (employee_id, department_id, product_id, status, qty, serial, created_by, created_at, updated_by, updated_at) SELECT employee_id, department_id, product_id, '$status', '$input_qty', serial, created_by, created_at, '$admin_username', '$date' FROM product_release  WHERE id='$id'")or die(mysqli_error());
+
+	//mysqli_query($conn,"INSERT INTO product_release (date,username,action) VALUES (NOW(),'$admin_username','Change release status id:$id, status:$status')") or die(mysqli_error());
+}
+
+mysqli_query($conn,"INSERT INTO activity_log (date,username,action) VALUES (NOW(),'$admin_username','Change release status id:$id, status:$status')")or die(mysqli_error());										
+}											
+?>	
 			  		
 </div>
 </div>

@@ -1,5 +1,7 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
+<link rel="stylesheet" type="text/css" href="assets/datatable/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="assets/datatable/buttons.dataTables.min.css">
     <body>
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
@@ -33,6 +35,7 @@
   	<table cellpadding="0" cellspacing="0" border="0" class="table" id="releasedTable">
 		<thead>		
 		        <tr>			        
+					<th>QR</th>
 					<th>Employee</th>
 					<th>Item</th>
 					<th>Quantity </th>
@@ -57,6 +60,10 @@ while($row = mysqli_fetch_array($device_query)){
 	$id = $row['id'];
 ?>
 		<tr>
+			<?php 
+				$qr='';
+			?>
+			<td><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?=$row['id']?>&choe=UTF-8" title="Scan Code" style="width: 100px; height: 100px; max-width: none;" /></td>
 			<td><?php echo $row['firstname'].($row['middlename']!='' ? $row['middlename'].' ' : ' ').$row['lastname'].' ( '.$row['type'].' : '.$row['position'].' ) #'.$row['contact_no']; ?></td>
 			<td><?php echo $row['sku'].' '.$row['name']; ?></td>
 			<td><?php echo $row['qty']; ?></td>
@@ -143,25 +150,33 @@ $.jGrowl("Status changed", { header: 'Status changed' });
 </div>
 <?php include('script.php'); ?>
 
+<script type="text/javascript" charset="utf8" src="assets/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.print.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#releasedTable').dataTable( {
+	        sDom: 'T<"clear">lfrtipB',
+			aaSorting: [
+	            [7, "desc"]
+	        ],
+	        aoColumnDefs: [{
+	        	'bSearchable' : false, 
+		        'bSortable': false,
+		        'aTargets': [-1, -2] /* 1st one, start by the right */
+		    }]
+	    } );
+	} );
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#releasedTable').dataTable( {
-		sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-		sPaginationType: "bootstrap",
-		oLanguage: {
-			"sLengthMenu": "_MENU_ records per page"
-		},
-		aaSorting: [
-            [6, "desc"]
-        ],
-        aoColumnDefs: [{
-        	'bSearchable' : false, 
-	        'bSortable': false,
-	        'aTargets': [-1, -2] /* 1st one, start by the right */
-	    }]
-	});
-
 	<?php if (isset($_GET['view'])){ ?>
 		$('#releasedTable').dataTable().fnFilter('<?=$_GET['view']?>');
 	<?php } ?>	

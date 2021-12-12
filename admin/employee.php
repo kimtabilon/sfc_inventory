@@ -1,6 +1,7 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
-
+<link rel="stylesheet" type="text/css" href="assets/datatable/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="assets/datatable/buttons.dataTables.min.css">
 
     <body>
 		<?php include('navbar.php'); ?>
@@ -36,7 +37,7 @@
                             <div class="block-content collapse in">
                                 <div class="span12">
 								<form action="delete_emp.php" method="post">
-  									<table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
+  									<table cellpadding="0" cellspacing="0" border="0" class="table" id="employeeTable">
 									<a data-placement="right" title="Click to Delete check item"  data-toggle="modal" href="#item_delete" id="delete"  class="btn btn-danger" name=""><i class="icon-trash icon-large"> Delete</i></a>
 									<script type="text/javascript">
 									 $(document).ready(function(){
@@ -99,6 +100,26 @@
 		<?php include('footer.php'); ?>
         </div>
 		<?php include('script.php'); ?>
+
+<script type="text/javascript" charset="utf8" src="assets/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.print.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#employeeTable').dataTable( {
+	        sDom: 'T<"clear">lfrtipB',
+			aaSorting: [
+	            [1, "desc"]
+	        ]
+	    } );
+	} );
+</script>
     </body>
 
 </html>
