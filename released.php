@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="admin/assets/datatable/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="admin/assets/datatable/buttons.dataTables.min.css">
 <?php 
 	include('header.php'); 
 
@@ -82,21 +84,24 @@ while($row = mysqli_fetch_array($device_query)){
 </div>	
 </div>
 <script src="admin/bootstrap/js/jquery-1.11.0.js"></script>
-<script src="admin/vendors/datatables/js/jquery.dataTables.min.js"></script>
-<script src="admin/assets/DT_bootstrap.js"></script>
+
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="admin/assets/datatable/buttons.print.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#releasedTable').dataTable( {
-		sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-		sPaginationType: "bootstrap",
-		oLanguage: {
-			"sLengthMenu": "_MENU_ records per page"
-		},
+	    sDom: 'T<"clear">lfrtipB',
 		aaSorting: [
-            [6, "desc"]
-        ]
-	});
+	        [5, "desc"]
+	    ]
+	} );
 
 	<?php if (isset($_GET['view'])){ ?>
 		$('#releasedTable').dataTable().fnFilter('<?=$_GET['view']?>');

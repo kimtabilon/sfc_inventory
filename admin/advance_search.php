@@ -1,5 +1,7 @@
 <?php include('header.php'); ?>
 <?php include('session.php'); ?>
+<link rel="stylesheet" type="text/css" href="assets/datatable/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="assets/datatable/buttons.dataTables.min.css">
     <body>
 		<?php include('navbar.php'); ?>
         <div class="container-fluid">
@@ -35,7 +37,7 @@
 <div class="block-content collapse in">
     <div class="span12">
 	<form action="" method="post">
-  	<table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
+  	<table cellpadding="0" cellspacing="0" border="0" class="table" id="advanceSearchTable">
 		<thead>		
 		        <tr>			        
 					<th>Employee</th>
@@ -151,5 +153,24 @@ mysqli_query($conn,"INSERT INTO activity_log (date,username,action) VALUES (NOW(
 <?php include('footer.php'); ?>
 </div>
 <?php include('script.php'); ?>
+<script type="text/javascript" charset="utf8" src="assets/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="assets/datatable/buttons.print.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#advanceSearchTable').dataTable( {
+	        sDom: 'T<"clear">lfrtipB',
+			aaSorting: [
+	            [5, "desc"]
+	        ]
+	    } );
+	} );
+</script>
  </body>
 </html>
