@@ -167,7 +167,7 @@ mysqli_query($conn,"INSERT INTO activity_log (date,username,action) VALUES (NOW(
 		$('#advanceSearchTable').dataTable( {
 	        sDom: 'T<"clear">lfrtipB',
 			aaSorting: [
-	            [5, "desc"]
+	            [6, "desc"]
 	        ]
 	    } );
 	} );
