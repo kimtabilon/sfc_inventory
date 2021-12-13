@@ -1,5 +1,14 @@
 <link rel="stylesheet" type="text/css" href="admin/assets/datatable/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="admin/assets/datatable/buttons.dataTables.min.css">
+<script type="text/javascript">
+	function preventBack() {
+        window.history.forward();
+    }
+     
+    setTimeout("preventBack()", 0);
+     
+    window.onunload = function () { null };
+</script>
 <?php 
 	include('header.php'); 
 
@@ -22,6 +31,7 @@
 				   <div id="block_bg" class="block">
                         <div class="navbar navbar-inner block-header">
                            <div class="muted pull-left"><i class="icon-reorder icon-large"></i> &nbsp; <?=$name?> - Transactions</div>
+                           <div class="muted pull-right"><a id="return" data-placement="left" title="Click to Return" href="index.php"><i class="icon-arrow-left icon-large"></i> Logout</a></div>
 						</div>
 
 <br>		
