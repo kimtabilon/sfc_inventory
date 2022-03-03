@@ -28,7 +28,7 @@
 										<div class="control-group">
 								          <label class="control-label" for="inputPassword">Browse Your Computer</label>
 								           <div class="controls">
-									        <input name="image" class="input-file uniform_on" id="fileInput" type="file" required>
+									        <input name="image" class="input-file uniform_on" id="fileInput" type="file" >
 								           </div>
 								         </div>
 	
@@ -50,16 +50,20 @@
                         <!-- /block -->
                     </div><?php
 if (isset($_POST['update'])){
+	$ifImg="";
+	$dep_name = $_POST['dep_name'];
 
- $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
- $image_name = addslashes($_FILES['image']['name']);
- $image_size = getimagesize($_FILES['image']['tmp_name']);
+	if($_FILES['image']['tmp_name']!='') {
+		$image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+	 $image_name = addslashes($_FILES['image']['name']);
+	 $image_size = getimagesize($_FILES['image']['tmp_name']);
 
- move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $_FILES["image"]["name"]);
- $thumbnails = "uploads/" . $_FILES["image"]["name"];
- $dep_name = $_POST['dep_name'];
- 
-mysqli_query($conn,"update department set dep_name = '$dep_name', thumbnails=' $thumbnails' where dep_id = '$get_id' ")or die(mysqli_error());
+	 move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $_FILES["image"]["name"]);
+	 $thumbnails = "uploads/" . $_FILES["image"]["name"];
+	 
+	 $ifImg=", thumbnails=' $thumbnails'";
+	}
+mysqli_query($conn,"update department set dep_name = '$dep_name' $ifImg where dep_id = '$get_id' ")or die(mysqli_error());
 
 mysqli_query($conn,"insert into activity_log (date,username,action) values(NOW(),'$admin_username','Edit Department $dep_name')")or die(mysqli_error());
 ?>

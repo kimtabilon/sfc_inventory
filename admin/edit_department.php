@@ -61,7 +61,7 @@
 											<input id="optionsCheckbox" class="uniform_on" name="selector[]" type="checkbox" value="<?php echo $id; ?>">
 											</td>
 											<td><?php echo $location_row['dep_name']; ?></td>
-											<td><?php echo $location_row['thumbnails']; ?></td>
+											<td><img id="avatar1" src="<?php echo $location_row['thumbnails']; ?>"></td>
 											
 											<?php include('toolttip_edit_delete.php'); ?>																											
 											<td width="125">

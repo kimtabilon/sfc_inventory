@@ -1,6 +1,17 @@
      <div class="span3" id="sidebar">
 	              <img id="admin_avatar" class="img-polaroid" src="<?php echo $row['adminthumbnails']; ?>"> 
                   <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                  	<!------/.* advance search sidebar*------->
+                         <li class="">
+                           <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs5"><i class="icon-chevron-right"></i><i class="icon-search icon-large"></i>&nbsp;Advance Search 
+						   <div class="muted pull-right"><i class="caret"></i></div></a>
+                           </a>
+                           <ul id="bs5" class="collapse">
+                           <li>
+                           <a href="#myModal1" data-toggle="modal" tabindex="-1" ><i class="icon-chevron-right"></i><i class="icon-search"></i>&nbsp;Realease Item</a>
+                           </li>
+                           </ul>
+                        </li>
                            <li class=""> 
 						   <a href="dashboard.php"><i class="icon-chevron-right"></i><i class="icon-home icon-large"></i>&nbsp;Dashboard</a> 
 						   </li>
@@ -28,7 +39,10 @@
 							<div class="muted pull-right"><i class="caret"></i></div></a>						
 						    <ul id="bs2" class="collapse">						
                             <li class="">
-                            <a href="product_release.php"><i class="icon-chevron-right"></i><i class="icon-share"></i> Releasing</a>
+                            	<a href="product_release.php"><i class="icon-chevron-right"></i><i class="icon-share"></i> Releasing</a>
+                            </li>
+                            <li class="">
+                            	<a href="product_release_report.php"><i class="icon-chevron-right"></i><i class="icon-share"></i> Reports</a>
                             </li>
 						    <!-- <li class="">
                             <a href="view_return.php"><i class="icon-chevron-right"></i><i class="icon-eye-open"></i> View Return Item</a>
@@ -54,9 +68,9 @@
 						    </ul>
 						</li>
 						
-					  <!------/.* manage PPES user sidebar*------->	
+					  <!------/.* Manage User sidebar*------->	
 						<li>						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs3"><i class="icon-chevron-right"></i><i class="icon-group"></i>&nbsp;Manage PPES User
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs3"><i class="icon-chevron-right"></i><i class="icon-group"></i>&nbsp;Manage User
 							<div class="muted pull-right"><i class="caret"></i></div></a>						
 						    <ul id="bs3" class="collapse">		
 						    <li class="">
@@ -87,17 +101,7 @@
 						    </ul>
 						</li>
 						
-					  <!------/.* advance search sidebar*------->
-                         <li class="">
-                           <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs5"><i class="icon-chevron-right"></i><i class="icon-search icon-large"></i>&nbsp;Advance Search 
-						   <div class="muted pull-right"><i class="caret"></i></div></a>
-                           </a>
-                           <ul id="bs5" class="collapse">
-                           <li>
-                           <a href="#myModal1" data-toggle="modal" tabindex="-1" ><i class="icon-chevron-right"></i><i class="icon-search"></i>&nbsp;Realease Item</a>
-                           </li>
-                           </ul>
-                        </li>
+					  
                   </ul>					
 				
 				<?php include('search_form.php'); ?>																		

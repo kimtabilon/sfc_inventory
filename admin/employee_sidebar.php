@@ -51,9 +51,9 @@
 						    </ul>
 						</li>
 						
-					  <!------/.* manage PPES user sidebar*------->	
+					  <!------/.* Manage User sidebar*------->	
 						<li>						
-						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs3"><i class="icon-chevron-right"></i><i class="icon-group"></i>&nbsp;Manage PPES User
+						    <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="collapse" data-target="#bs3"><i class="icon-chevron-right"></i><i class="icon-group"></i>&nbsp;Manage User
 							<div class="muted pull-right"><i class="caret"></i></div></a>						
 						    <ul id="bs3" class="collapse">						
                             <!-- 

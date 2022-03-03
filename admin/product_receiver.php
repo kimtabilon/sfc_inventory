@@ -28,7 +28,7 @@
   	<table cellpadding="0" cellspacing="0" border="0" class="table" id="receiverTable">
 		<thead>		
 		        <tr>			        
-					<th>SKU</th>
+					<th>SKU : Stock Keeping Unit</th>
 					<th>Name</th>
 					<th>Quantity </th>
 			        <th>Serial  </th>					

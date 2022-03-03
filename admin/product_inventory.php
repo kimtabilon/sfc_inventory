@@ -25,14 +25,14 @@
   	<table cellpadding="0" cellspacing="0" border="0" class="table" id="inventoryTable">
 		<thead>		
 		        <tr>			  
-					<th>SKU</th>
+					<th>SKU : Stock Keeping Unit</th>
 					<th>Name</th>
 					<th>Received Qty</th>
-			        <th>Allocate Qty</th>					
+			        <th>Reserved Qty</th>					
 			        <th>Released Qty</th>					
 					<th>Returned Good</th>
 					<th>Returned Damage</th>
-					<th>Total</th>			
+					<th>Total Remaining</th>			
 		    </tr>
 		</thead>
 <tbody>

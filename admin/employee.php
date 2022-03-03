@@ -36,9 +36,9 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-								<form action="delete_emp.php" method="post">
+								<form action="delete_emp.php" method="post" onsubmit="confirm('Delete selected employee?')">
   									<table cellpadding="0" cellspacing="0" border="0" class="table" id="employeeTable">
-									<a data-placement="right" title="Click to Delete check item"  data-toggle="modal" href="#item_delete" id="delete"  class="btn btn-danger" name=""><i class="icon-trash icon-large"> Delete</i></a>
+									<button data-placement="right" title="Click to Delete check item" id="delete"  class="btn btn-danger" name=""><i class="icon-trash icon-large"> Delete</i></button>
 									<script type="text/javascript">
 									 $(document).ready(function(){
 									 $('#delete').tooltip('show');
