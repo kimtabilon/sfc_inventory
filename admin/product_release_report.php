@@ -60,7 +60,7 @@ $device_query = mysqli_query($conn,"
 SELECT product_release.*, product.sku, product.name, client.* from product_release
 LEFT JOIN product ON product_release.product_id = product.id			    
 LEFT JOIN client ON product_release.employee_id = client.client_id			    
-WHERE product_release.created_at BETWEEN CAST('$_from' AS DATE) AND CAST('$_to' AS DATE) 		    
+WHERE product_release.created_at >= '$_from 00:00:01' AND product_release.created_at <= '$_to 23:59:00' 		    
 ORDER BY product_release.created_at DESC")or die(mysqli_error());
 
 while($row = mysqli_fetch_array($device_query)){
