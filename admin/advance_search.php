@@ -58,21 +58,21 @@
 		$field = 'id';
 
 		if(isset($_GET['product_id'])) {
-			$id = $_GET['product_id'];
+			$id = (int)$_GET['product_id'];
 			$field = 'product_id';
 		} 
 
 		if(isset($_GET['id'])) {
-			$id = $_GET['id'];
+			$id = (int)$_GET['id'];
 			$field = 'id';
 		} 
+
 		
 		$search_query = mysqli_query($conn,"
 			SELECT product_release.*, product.sku, product.name, client.* from product_release
 			LEFT JOIN product ON product_release.product_id = product.id			    
 			LEFT JOIN client ON product_release.employee_id = client.client_id			    
 			WHERE product_release.$field = $id")or die(mysqli_error());
-		
 		while($row = mysqli_fetch_array($search_query)){
 		?>
 		<tr>
